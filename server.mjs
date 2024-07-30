@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config(); // Load environment variables from .env
 
 import express from 'express';
 import multer from 'multer';
@@ -7,10 +7,10 @@ import AWS from 'aws-sdk';
 import cors from 'cors';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import request from 'supertest'; // Import Supertest for testing
 
 const app = express();
 const port = 3000;
-
 
 // AWS Configuration
 AWS.config.update({
@@ -26,6 +26,16 @@ const transcribeService = new AWS.TranscribeService();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Basic GET method for testing
+app.get('/hello', (req, res) => {
+    res.send('Hello World');
+});
+
+// Basic POST method for testing
+app.post('/echo', (req, res) => {
+    res.json(req.body);
+});
 
 // Multer configuration
 const storage = multer.memoryStorage();
@@ -89,3 +99,4 @@ app.get('/transcription/:jobId', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+
