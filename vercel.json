@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.mjs",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "server.mjs"
+      }
+    ],
+    "env": {
+      "AWS_ACCESS_KEY_ID": "@aws-access-key-id",
+      "AWS_SECRET_ACCESS_KEY": "@aws-secret-access-key"
+    }
+  }
+  
